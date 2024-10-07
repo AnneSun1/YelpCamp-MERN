@@ -14,6 +14,7 @@ const cors = require("cors");
 // allows this api to ONLY take reqs from out fronend
 const corsOptions = {
     origin: ["http://localhost:3000"],
+    credentials: true,
 }
 
 
@@ -43,10 +44,6 @@ db.once("open", () => {
 });
 
 const app = express();
-// app.engine('ejs', ejsMate);
-
-// app.set('view engine', 'ejs');
-// app.set('views', path.join(__dirname, 'views')) // viewpath
 
 app.use(cors(corsOptions));
 
@@ -80,19 +77,12 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-    console.log(req.session);
+    // console.log(req.session);
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();
 })
-
-// app.get('/fakeUser', async(req, res) => {
-//     const user = new User({email: 'g@gmail.com', username: 'g'});
-//     const newUser = await User.register(user, 'chicken'); // hashes the user
-//     res.send(newUser);
-// })
-
 
 // campground router
 app.use('/', users);
@@ -114,7 +104,6 @@ app.use((err, req, res, next) => {
     const {statusCode = 500 } = err;
     if (!err.message) err.message = 'Oh No, Something Went Wrong!'
     res.status(statusCode);
-    res.sendFile(path.join(__dirname, '../frontend/my-app/build', 'index.html'));
 })
 
 app.listen(3010, ()=> {

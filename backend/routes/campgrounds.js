@@ -38,7 +38,7 @@ const renderApp = async () => {
 
 }
 // order matters
-router.get('/new', isLoggedIn, campgrounds.renderNewForm);
+router.get('/new', isLoggedIn, campgrounds.addCamp);
 
 router.route('/:id')
     .get(catchAsync(campgrounds.showCampground))

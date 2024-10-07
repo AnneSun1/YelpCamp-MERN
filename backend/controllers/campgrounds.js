@@ -8,15 +8,13 @@ const geocoder = mbxGeocoding({ accessToken: mapBoxToken });
 // Fixed
 module.exports.index = async(req, res) => {
     const campgrounds = await campground.find({});
-    console.log(campgrounds);
+    // console.log(campgrounds);
     res.json(campgrounds);
-    
 };
 
-// not fixed
-module.exports.renderNewForm = (req, res) => {
-    // res.render('campgrounds/new');
-    res.sendFile(path.join(__dirname, '../frontend/my-app/build', 'index.html'));
+// fixed
+module.exports.addCamp= (req, res) => {
+    res.status(200).json({ message: 'Camp added', review });
 };
 
 // not fixed
@@ -32,7 +30,7 @@ module.exports.createCampground = async (req, res, next) => {
     await camp.save();
     console.log(camp);
     req.flash('success', 'Successfully made a new campground!');
-    res.redirect(`/campgrounds/${camp._id}`); 
+    res.redirect(`http://localhost:3000/campgrounds/${camp._id}`); 
 };
 
 // fixed
@@ -45,9 +43,9 @@ module.exports.showCampground = async(req, res) => {
     }).populate('author');
     if (!camp) {
         req.flash('error', 'Cannot find that campground!');
-        return res.redirect('/campgrounds');
+        // return res.redirect('/campgrounds');
+        res.status(404).json({message: "Cannot find that campground" })
     }
-    console.log(camp);
     res.json(camp);
 }
 
