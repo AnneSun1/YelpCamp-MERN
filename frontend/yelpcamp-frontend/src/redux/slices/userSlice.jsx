@@ -15,7 +15,6 @@ const userSlice = createSlice({
 
         fetchUserRequest: (state) => {
             state.loading = true;
-            state.error = null; 
         },
 
         fetchUserSuccess: (state, action) => {
@@ -30,15 +29,21 @@ const userSlice = createSlice({
             state.error = action.payload; // Store the error message
         },
 
-        // setUserInfo: (state, action) => {
-        //     state.user = action.payload; 
-        // },
+        logoutUserRequest: (state) => {
+            state.loading = true;
+        },
 
-        logoutUser: (state) => {
-            state.user = null; 
+        logoutUserSuccess: (state) => {
+            state.user = action.payload; 
             state.error = null;
             state.loading = false;
         },
+
+        logoutUserFailure: (state) => {
+            state.user = null; 
+            state.error = action.payload;
+            state.loading = false;
+        }
     },
 });
 

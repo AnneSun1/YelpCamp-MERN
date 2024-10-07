@@ -13,7 +13,6 @@ router.route('/register')
 
 router.route('/login')
     // .get(users.renderLogin)
-    // .post(passport.authenticate('local', {failureFlash: true, failureRedirect: 'http://localhost:3000/login'}), users.login)
     .post(passport.authenticate('local', {failureFlash: true, failureRedirect: 'http://localhost:3000/login'}), users.login)
 
 router.get('/logout', users.logout);

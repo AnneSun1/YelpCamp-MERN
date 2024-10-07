@@ -14,14 +14,6 @@ import Logout from './users/Logout';
 import Reviews from './campgrounds/Reviews'
 
 function App() {
-  const fetchAPI = async () => {
-    const response = await axios.get("http://localhost:3010/"); // axios fetches this route
-  
-  };
-
-  useEffect(() => {
-    fetchAPI();
-  }, [])
 
 
   return (

@@ -13,7 +13,7 @@ const ExpressError = require('./utils/ExpressError');
 const cors = require("cors");
 // allows this api to ONLY take reqs from out fronend
 const corsOptions = {
-    origin: ["http://localhost:3000"],
+    origin: 'http://localhost:3000',
     credentials: true,
 }
 
@@ -62,6 +62,7 @@ const sessionConfig = {
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
+        sameSite: 'None',
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
